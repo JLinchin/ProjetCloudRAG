@@ -6,7 +6,7 @@ L'ia ne répond qu'à partir du contenu du document, si elle ne la trouve pas, e
 dire explicitement que l'information est absente.
 
 
-> Voir demo vidéo
+> Voir demo vidéo dans media/
 
 
 ## Interface streamlit
@@ -18,7 +18,7 @@ Le projet utilise une petite interface web streamlit qui permet de :
 - obtenir une réponse à partir du document ;
 - visualiser les passages exacts du document utilisés comme sources.
 
-![interface](Interface.png)
+![interface](./media/Interface.png)
 
 Principe d'un RAG :
 
@@ -38,6 +38,24 @@ Document -> Découpage en passages -> Embeddings -> Base vectorielle (ChromaDB)
 | LLM local léger | Ollama avec `qwen2.5:0.5b`, appelé en HTTP |
 | Tests | Pytest (`tests/test_basic.py`) |
 | Automatisation CI | GitHub Actions (`.github/workflows/cicd.yml`) |
+
+## Architecture technique
+
+### Briques technologiques et interactions
+
+Quatre briques qui communiquent en HTTP : l'interface Streamlit, le backend FastAPI, le stockage
+(MinIO + ChromaDB), et le LLM local (Ollama).
+
+![interface](./media/schema_technique.png)
+
+- Streamlit ne parle qu'au backend FastAPI, jamais directement à MinIO,
+  ChromaDB ou Ollama.
+- FastAPI est le seul point d'entrée qui orchestre les trois services :
+  stockage du document brut (MinIO), recherche vectorielle (ChromaDB) et
+  génération de texte (Ollama).
+- Le modèle d'embeddings (`sentence-transformers`) est chargé en mémoire dans le
+  process du backend, pas comme un service séparé.
+
 
 ## Installer et lancer Ollama
 
