@@ -34,3 +34,35 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      # Set up Python
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Installation des dependances
+        run: pip install -r requirements.txt
+
+      - name: Installation de Ollama
+        run: curl -fsSL https://ollama.com/install.sh | sh
+
+      - name: Recuperation du modele Ollama
+        run: ollama pull qwen2.5:0.5b
+
+      - name: Demarrage du serveur Ollama
+        run: |
+          ollama serve &
+          sleep 5
+
+      - name: Demarrage de minIO avec Docker
+        run: docker-compose up -d
+
+      - name: Demarrage de l'API
+        run: |
+          uvicorn backend_api:app --host 0.0.0.0 --port 8000 --reload & 
+          sleep 5
+
+      - name: Demarrage de l'application Streamlit
+        run: |
+          streamlit run streamlit.py --server.port 8501 --server.address 0.0.0.0 &
+          sleep 5
