@@ -1,3 +1,11 @@
-dotenv
-requests
+fastapi
+uvicorn
+python-multipart
 streamlit
+requests
+python-dotenv
+minio
+chromadb
+sentence-transformers
+pytest
+httpx
