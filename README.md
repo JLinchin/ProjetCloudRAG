@@ -15,6 +15,8 @@ Le projet utilise une petite interface web streamlit qui permet de :
 - obtenir une réponse à partir du document ;
 - visualiser les passages exacts du document utilisés comme sources.
 
+![interface](Interface.png)
+
 Principe d'un RAG :
 
 ```
