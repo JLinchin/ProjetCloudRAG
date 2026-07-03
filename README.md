@@ -6,6 +6,9 @@ L'ia ne répond qu'à partir du contenu du document, si elle ne la trouve pas, e
 dire explicitement que l'information est absente.
 
 
+> Voir demo vidéo
+
+
 ## Interface streamlit
 
 Le projet utilise une petite interface web streamlit qui permet de :
