@@ -54,8 +54,8 @@ jobs:
           ollama serve &
           sleep 5
 
-      - name: Demarrage de minIO avec Docker
-        run: docker-compose up -d
+      # - name: Demarrage de minIO avec Docker
+      #   run: docker-compose up -d
 
       - name: Demarrage de l'API
         run: |
