@@ -9,8 +9,8 @@ dire explicitement que l'information est absente.
 ## Interface streamlit
 
 Le projet utilise une petite interface web streamlit qui permet de :
-- charger un document en .txt ;
-- l'indexer (découpage en chunks + calcul d'embeddings + stockage vectoriel) ;
+- charger et indexer un document en .txt en une seule action (découpage en chunks +
+  calcul d'embeddings + stockage vectoriel) ;
 - poser une question à l'ia ;
 - obtenir une réponse à partir du document ;
 - visualiser les passages exacts du document utilisés comme sources.
@@ -83,13 +83,13 @@ Le backend appelle Ollama en HTTP sur `http://localhost:11434/api/generate`
 
 ## Indexer le document
 
-Dans l'interface Streamlit, l'indexation se fait en deux étapes :
+Dans l'interface Streamlit :
 
-1. Charger `corpus_de_travail.txt` "1. Envoyer le document (upload)"
-2. Cliquer sur "2. Indexer le document". Le texte est lu dans MinIO, découpé
-   en passages de 800 caractères (chevauchement de 120 caractères), transformé en
-   embeddings, puis stocké dans ChromaDB avec ses métadonnées (nom du fichier,
-   numéro de passage).
+1. Charger `corpus_de_travail.txt`, puis cliquer sur "1. Envoyer et indexer le
+   document". Ce bouton envoie le fichier dans MinIO, puis lance immédiatement
+   l'indexation : le texte est lu depuis MinIO, découpé en passages de 800
+   caractères (chevauchement de 120 caractères), transformé en embeddings, puis
+   stocké dans ChromaDB avec ses métadonnées (nom du fichier, numéro de passage).
 
 ## Exemple de question
 
